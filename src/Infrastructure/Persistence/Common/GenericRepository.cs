@@ -15,17 +15,12 @@ public sealed class GenericRepository<T> : IGenericRepository<T> where T : BaseA
     }
 
     public IQueryable<T> Entities => _context.Set<T>();
-    
-    async Task<T?> IGenericRepository<T>.GetByIdAsync(Guid id)
-    {
-        return await _context.Set<T>().FindAsync(id);
-    }
 
-    async Task<List<T>> IGenericRepository<T>.GetAllAsync()
+    async Task<List<T>> IGenericRepository<T>.GetAllAsync(CancellationToken cancellationToken)
     {
         return await _context
             .Set<T>()
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
     }
 
     void IGenericRepository<T>.Create(T entity)

@@ -15,3 +15,10 @@ await builder
     .AddMiddleware()
     .AddApplicationServices()
     .RunAppAsync();
+    
+namespace Presentation
+{
+    public partial class Program
+    {
+    }
+}

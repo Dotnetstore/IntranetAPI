@@ -1,0 +1,16 @@
+﻿services:
+  presentation:
+    image: presentation
+    build:
+      context: .
+      dockerfile: src/Presentation/Dockerfile
+  
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=dotnetstore
+      - POSTGRES_PASSWORD=dotnetstoretestpassword
+      - POSTGRES_DB=mydb
+    ports:
+      - '5432:5432'

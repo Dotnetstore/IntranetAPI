@@ -33,7 +33,7 @@ public class OwnCompanyControllerTests(DotnetstoreApiFactory factory) : Integrat
     {
         var response = await Client.GetAsync(ApiEndPoints.System.V1.OwnCompany.GetAll + "?isDeleted=false");
         var result = await response.Content.ReadAsStringAsync(CancellationToken);
-        var list = JsonConvert.DeserializeObject<IEnumerable<OwnCompanyDto>>(result);
+        var list = JsonConvert.DeserializeObject<IEnumerable<OwnCompanyDto>>(result)!.ToList();
 
         var deleted = list.Where(q => q.IsDeleted);
         deleted.Should().HaveCount(0);
@@ -44,7 +44,7 @@ public class OwnCompanyControllerTests(DotnetstoreApiFactory factory) : Integrat
     {
         var response = await Client.GetAsync(ApiEndPoints.System.V1.OwnCompany.GetAll + "?isDeleted=true");
         var result = await response.Content.ReadAsStringAsync(CancellationToken);
-        var list = JsonConvert.DeserializeObject<IEnumerable<OwnCompanyDto>>(result);
+        var list = JsonConvert.DeserializeObject<IEnumerable<OwnCompanyDto>>(result)!.ToList();
 
         var notDeleted = list.Where(q => !q.IsDeleted);
         notDeleted.Should().HaveCount(0);

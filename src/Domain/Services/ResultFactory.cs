@@ -1,4 +1,4 @@
-﻿namespace Application.Common.Services;
+﻿namespace Domain.Services;
 
 /// <summary>
 /// Provides factory methods for creating instances of <see cref="Result{TValue}"/>.

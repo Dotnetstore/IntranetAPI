@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Domain.Common.Interfaces;
 using Domain.Models;
 using FluentValidation;
 using MediatR;

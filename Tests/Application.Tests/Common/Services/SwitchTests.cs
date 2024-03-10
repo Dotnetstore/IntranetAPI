@@ -1,4 +1,6 @@
-﻿namespace Application.Tests.Common.Services;
+﻿using Domain.Services;
+
+namespace Application.Tests.Common.Services;
 
 public class SwitchTests
 {

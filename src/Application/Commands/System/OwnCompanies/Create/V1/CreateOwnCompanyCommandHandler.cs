@@ -1,6 +1,6 @@
 ﻿using Application.Common.Interfaces;
-using Application.Common.Services;
 using Domain.Entities.System;
+using Domain.Services;
 using MediatR;
 
 namespace Application.Commands.System.OwnCompanies.Create.V1;

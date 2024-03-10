@@ -1,7 +1,7 @@
-﻿using Application.Common.Interfaces;
+﻿using Domain.Common.Interfaces;
 using Domain.Models;
 
-namespace Application.Common.Services;
+namespace Domain.Services;
 
 /// <summary>
 /// A discriminated union of errors or a value.

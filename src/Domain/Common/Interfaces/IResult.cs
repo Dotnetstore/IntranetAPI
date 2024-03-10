@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
 
-namespace Application.Common.Interfaces;
+namespace Domain.Common.Interfaces;
 
 public interface IResult
 {

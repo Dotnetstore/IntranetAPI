@@ -1,4 +1,4 @@
-﻿namespace Application.Common.Services;
+﻿namespace Domain.Services;
 
 public readonly record struct Success;
 public readonly record struct Created;

@@ -1,4 +1,5 @@
 ﻿using Domain.Enums;
+using Domain.Services;
 
 namespace Application.Tests.Common.Services;
 

@@ -1,4 +1,4 @@
-﻿using Application.Common.Services;
+﻿using Domain.Services;
 using MediatR;
 
 namespace Application.Commands.System.OwnCompanies.Create.V1;

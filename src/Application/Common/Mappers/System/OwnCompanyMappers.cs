@@ -19,7 +19,7 @@ internal static class OwnCompanyMappers
             IsSystem = q.IsSystem,
             LastUpdatedBy = q.LastUpdatedBy,
             LastUpdatedDate = q.LastUpdatedDate,
-            CorporateId = q.CorporateId,
+            CorporateId = q.CorporateId?.Id,
             Name = q.Name,
             Id = q.Id.Id
         };

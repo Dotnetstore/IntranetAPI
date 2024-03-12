@@ -8,8 +8,6 @@ namespace Application.Commands.System.OwnCompanies.Create.V1;
 internal sealed class CreateOwnCompanyCommandHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<CreateOwnCompanyCommand, Result<bool>>
 {
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
-
     async Task<Result<bool>> IRequestHandler<CreateOwnCompanyCommand, Result<bool>>
         .Handle(CreateOwnCompanyCommand request, CancellationToken cancellationToken)
     {
@@ -29,8 +27,8 @@ internal sealed class CreateOwnCompanyCommandHandler(IUnitOfWork unitOfWork)
             Name = request.Name
         };
         
-        _unitOfWork.Repository<OwnCompany>().Create(company);
-        await _unitOfWork.SaveAsync(cancellationToken);
+        unitOfWork.Repository<OwnCompany>().Create(company);
+        await unitOfWork.SaveAsync(cancellationToken);
 
         return true;
     }

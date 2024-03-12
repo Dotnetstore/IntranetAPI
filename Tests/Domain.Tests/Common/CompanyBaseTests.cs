@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.ValueObjects.CorporateIds;
 using FluentAssertions;
 using FluentAssertions.Execution;
 
@@ -9,16 +10,18 @@ public class CompanyBaseTests
     [Fact]
     public void Should_contain_correct_properties()
     {
+        var corporateId = CorporateId.Create("7101263924").Value;
+        
         var item = new CompanyBaseClass
         {
             Name = "Name",
-            CorporateId = "CorporateId"
+            CorporateId = corporateId
         };
 
         using (new AssertionScope())
         {
             item.Name.Should().Be("Name");
-            item.CorporateId.Should().Be("CorporateId");
+            item.CorporateId!.Value.Id.Should().Be("SE710126392401");
         }
     }
 }

@@ -3,14 +3,21 @@ using Domain.Services;
 
 namespace Domain.ValueObjects.CorporateIds;
 
-public record struct CorporateId(string? Id)
+public record struct CorporateId
 {
-    public string? Id { get; init; } = Id;
+    public string? Id { get; }
 
-    public static Result<CorporateId>? Create(string? id)
+    private CorporateId(string? id)
     {
+        Id = id;
+    }
+
+    public static Result<CorporateId?> Create(string? id)
+    {
+        CorporateId? corporateId = null;
+        
         if (string.IsNullOrWhiteSpace(id))
-            return null;
+            return corporateId;
 
         if (SwedishCorporateId.Valid(id))
         {

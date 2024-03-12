@@ -1,6 +1,7 @@
 ﻿using Application.Commands.System.OwnCompanies.Create.V1;
 using Application.Queries.System.OwnCompanies.GetAll.V1;
 using Contracts.Dtos.System.V1;
+using Domain.ValueObjects.CorporateIds;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Swagger;
@@ -26,10 +27,15 @@ public class OwnCompanyController(ISender sender) : ControllerBase
     public async ValueTask<IActionResult> Create([FromBody] CreateOwnCompanyRequest request,
         CancellationToken cancellationToken = default)
     {
-        var command = new CreateOwnCompanyCommand(request.Name, request.CorporateId);
+        var corporateIdResult = CorporateId.Create(request.CorporateId);
 
+        if (corporateIdResult.IsError)
+            return BadRequest(corporateIdResult.FirstError.Description);
+        
+        var command = new CreateOwnCompanyCommand(request.Name, corporateIdResult.Value);
+        
         var result = await sender.Send(command, cancellationToken);
-
+        
         return Ok(result.Value);
     }
 }

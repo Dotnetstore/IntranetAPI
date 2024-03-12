@@ -8,15 +8,15 @@ namespace Domain.Tests.ValueObjects.CorporateIds;
 public class CorporateIDTests
 {
     [Theory]
-    [InlineData("556056-6258")]
-    public void Should_return_correct_object(string id)
+    [InlineData("556056-6258", "SE556056625801")]
+    public void Should_return_correct_object(string id, string expected)
     {
-        var corporateId = new CorporateId(id);
+        var corporateId = CorporateId.Create(id);
 
         using (new AssertionScope())
         {
-            corporateId.Should().BeOfType<CorporateId>();
-            corporateId.Id.Should().Be(id);
+            corporateId!.Value.Value.Should().BeOfType<CorporateId>();
+            corporateId!.Value.Value.Id.Should().Be(expected);
         }
     }
 
@@ -27,7 +27,7 @@ public class CorporateIDTests
     {
         var result = CorporateId.Create(value);
 
-        result.Should().BeNull();
+        result.Value.Should().BeNull();
     }
 
     [Theory]
@@ -38,8 +38,8 @@ public class CorporateIDTests
 
         using (new AssertionScope())
         {
-            result!.Value.IsError.Should().BeFalse();
-            result!.Value.Value.Should().NotBeNull();
+            result.IsError.Should().BeFalse();
+            result!.Value!.Value.Should().NotBeNull();
         }
     }
 
@@ -51,8 +51,8 @@ public class CorporateIDTests
 
         using (new AssertionScope())
         {
-            result!.Value.IsError.Should().BeTrue();
-            result!.Value.FirstError.Type.Should().Be(ErrorType.Validation);
+            result!.IsError.Should().BeTrue();
+            result!.FirstError.Type.Should().Be(ErrorType.Validation);
         }
     }
 }

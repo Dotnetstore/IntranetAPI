@@ -11,9 +11,5 @@ public sealed class CreateOwnCompanyCommandValidator : AbstractValidator<CreateO
             .NotNull()
             .MinimumLength(1)
             .MaximumLength(100);
-
-        RuleFor(q => q.CorporateId)
-            .MinimumLength(0)
-            .MaximumLength(50);
     }
 }

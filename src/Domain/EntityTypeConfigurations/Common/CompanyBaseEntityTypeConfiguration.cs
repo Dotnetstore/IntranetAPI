@@ -1,5 +1,7 @@
 ﻿using Domain.Common;
+using Domain.ValueObjects.CorporateIds;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.EntityTypeConfigurations.Common;
 
@@ -8,6 +10,12 @@ public abstract class CompanyBaseEntityTypeConfiguration<T> : BaseAuditableEntit
     public override void Configure(EntityTypeBuilder<T> builder)
     {
         base.Configure(builder);
+
+        string? value = null;
+        
+        var converter = new ValueConverter<CorporateId?, string?>(
+            q => q.HasValue ? q.Value.Id : value,
+            q => CorporateId.Create(q).Value);
 
         builder
             .Property(q => q.Name)
@@ -19,6 +27,7 @@ public abstract class CompanyBaseEntityTypeConfiguration<T> : BaseAuditableEntit
             .Property(q => q.CorporateId)
             .HasMaxLength(50)
             .IsRequired(false)
-            .IsUnicode(false);
+            .IsUnicode(false)
+            .HasConversion(converter);
     }
 }
